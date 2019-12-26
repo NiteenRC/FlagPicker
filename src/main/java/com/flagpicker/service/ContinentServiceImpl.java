@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flagpicker.exception.ContinentNotFoundException;
-import com.flagpicker.exception.CountryNotFoundException;
+import com.flagpicker.exception.ResourceNotFoundException;
 import com.flagpicker.model.Continent;
 import com.flagpicker.model.Country;
 import com.flagpicker.util.ErrorMessage;
@@ -47,9 +46,9 @@ public class ContinentServiceImpl implements ContinentService {
 	}
 
 	@Override
-	public List<Continent> fetchAll() {
+	public List<Continent> fetchAll() throws ResourceNotFoundException{
 		if (continents.isEmpty()) {
-			throw new ContinentNotFoundException(ErrorMessage.CONTINENTS_NOT_FOUND);
+			throw new ResourceNotFoundException(ErrorMessage.CONTINENTS_NOT_FOUND);
 		} else {
 			return continents;
 		}
@@ -58,16 +57,17 @@ public class ContinentServiceImpl implements ContinentService {
 	@Override
 	public List<Country> fetchCountriesByContinentName(String continentName) {
 		List<Continent> continentts = continents.stream()
-				.filter(continent -> continent.getContinent().equals(continentName)).collect(Collectors.toList());
+				.filter(continent -> continent.getContinent().toLowerCase().equals(continentName.toLowerCase()))
+				.collect(Collectors.toList());
 
 		if (continentts.isEmpty())
-			throw new ContinentNotFoundException(ErrorMessage.CONTINENT_NOT_FOUND);
+			throw new ResourceNotFoundException(ErrorMessage.CONTINENT_NOT_FOUND);
 
 		List<Country> countries = continentts.stream().map(continent -> continent.getCountries()).flatMap(List::stream)
 				.collect(Collectors.toList());
 
 		if (countries.isEmpty())
-			throw new ContinentNotFoundException(ErrorMessage.COUNTRIES_NOT_FOUND);
+			throw new ResourceNotFoundException(ErrorMessage.COUNTRIES_NOT_FOUND);
 
 		return countries;
 	}
@@ -75,16 +75,17 @@ public class ContinentServiceImpl implements ContinentService {
 	@Override
 	public String fetchFlagByCountryName(String countryName) {
 		List<Country> countries = continents.stream().map(continent -> continent.getCountries()).flatMap(List::stream)
-				.filter(country -> countryName.equals(country.getName())).collect(Collectors.toList());
+				.filter(country -> countryName.toLowerCase().equals(country.getName().toLowerCase()))
+				.collect(Collectors.toList());
 
 		if (countries.isEmpty())
-			throw new CountryNotFoundException(ErrorMessage.COUNTRY_NOT_FOUND);
+			throw new ResourceNotFoundException(ErrorMessage.COUNTRY_NOT_FOUND);
 
 		String flag = countries.stream().map(country -> country.getFlag()).filter(Objects::nonNull)
 				.map(Object::toString).collect(Collectors.joining());
 
 		if (flag.isEmpty())
-			throw new CountryNotFoundException(ErrorMessage.COUNTRY_FLAG_NOT_FOUND);
+			throw new ResourceNotFoundException(ErrorMessage.COUNTRY_FLAG_NOT_FOUND);
 
 		return flag;
 	}
