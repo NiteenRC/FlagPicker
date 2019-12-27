@@ -8,6 +8,13 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * This MetricService implements methods helps to monitor hits per service
+ * 
+ * @author Niteen Chougula
+ * @version 1.0
+ * @since 2019-12-27
+ */
 @Service
 public class MetricService implements IMetricService {
 

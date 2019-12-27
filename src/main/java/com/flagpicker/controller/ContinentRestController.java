@@ -13,13 +13,20 @@ import com.flagpicker.model.Continent;
 import com.flagpicker.model.Country;
 import com.flagpicker.service.IContinentService;
 
+/**
+ * This ContinentRestController has Rest end point helps to fetch data based on
+ * user rest api service
+ * 
+ * @author Niteen Chougula
+ * @version 1.0
+ * @since 2019-12-27
+ */
 @RestController
 @RequestMapping("/continent")
 public class ContinentRestController {
 
 	@Autowired
 	private IContinentService continentService;
-
 
 	@GetMapping("/fetchAll")
 	public ResponseEntity<List<Continent>> fetchAllWorld() {

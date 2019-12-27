@@ -2,7 +2,6 @@ package com.flagpicker.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +18,13 @@ import com.flagpicker.exception.ResourceNotFoundException;
 import com.flagpicker.model.Continent;
 import com.flagpicker.model.Country;
 
+/**
+ * This ContinentServiceImplTest has test cases to cover all test scenarios.
+ * 
+ * @author Niteen Chougula
+ * @version 1.0
+ * @since 2019-12-27
+ */
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class ContinentServiceImplTest {

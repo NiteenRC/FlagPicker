@@ -4,6 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * This Continent is POJO class, it has continent name and list of countries
+ * 
+ * @author Niteen Chougula
+ * @version 1.0
+ * @since 2019-12-27
+ */
 @Component
 public class Continent {
 	private String continent;

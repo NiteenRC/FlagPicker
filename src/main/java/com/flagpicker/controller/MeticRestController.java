@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.flagpicker.metric.IMetricService;
 
+/**
+ * This MeticRestController has Rest end point helps to monitor hits per service
+ * 
+ * @author Niteen Chougula
+ * @version 1.0
+ * @since 2019-12-27
+ */
 @RestController
 public class MeticRestController {
 
