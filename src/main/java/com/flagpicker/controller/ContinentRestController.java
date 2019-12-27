@@ -11,21 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.flagpicker.model.Continent;
 import com.flagpicker.model.Country;
-import com.flagpicker.service.ContinentService;
+import com.flagpicker.service.IContinentService;
 
 @RestController
-@RequestMapping("/flagpicker")
-public class ContinentController {
+@RequestMapping("/continent")
+public class ContinentRestController {
 
 	@Autowired
-	private ContinentService continentService;
+	private IContinentService continentService;
+
 
 	@GetMapping("/fetchAll")
-	public ResponseEntity<List<Continent>> fetchAllWorld(){
+	public ResponseEntity<List<Continent>> fetchAllWorld() {
 		return ResponseEntity.ok().body(continentService.fetchAll());
 	}
 
-	@GetMapping("/continent/{continentName}")
+	@GetMapping("/{continentName}")
 	public ResponseEntity<List<Country>> fetchCountriesByContinentName(@PathVariable String continentName) {
 		return ResponseEntity.ok().body(continentService.fetchCountriesByContinentName(continentName));
 	}

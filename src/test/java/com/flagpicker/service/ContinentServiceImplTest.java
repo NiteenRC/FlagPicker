@@ -2,6 +2,7 @@ package com.flagpicker.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ContinentServiceImplTest {
 	private String jsonFilePath;
 
 	@Autowired
-	private ContinentService continentService;
+	private IContinentService continentService;
 
 	@Test
 	public void testValidaJsonFileName() {
